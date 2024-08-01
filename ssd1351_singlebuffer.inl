@@ -21,6 +21,8 @@ void updateScreen() {
 	sendCommandAndContinue(CMD_WRITE_TO_RAM);
 
 	ArrayType &buffer = frontBuffer();
+
+	/*
 	for (int16_t i = 0; i < W * H; i++) {
 		if (i % W) {
 			pushColor(buffer[i]);
@@ -31,6 +33,14 @@ void updateScreen() {
 			SPI.beginTransaction(spi_settings);
 		}
 	}
+	*/
+
+	for(int x=0; x<W; x++) {
+		for(int y=0; y<H; y++) {
+			pushColor(buffer[((W-1)-x)+y*H]);
+		}
+	}
+
 	SPI.endTransaction();
 }
 
